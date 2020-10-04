@@ -1,0 +1,6 @@
+audits
+businesses
+customers
+products
+sales
+sale_audits

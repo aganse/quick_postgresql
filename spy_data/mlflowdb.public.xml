@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="mlflowdb" schema="public" type="PostgreSQL - 12.4 (Debian 12.4-1.pgdg100+1)">
+   <sequences>
+      <sequence increment="1" name="audits_auditid_seq" startValue="1"/>
+      <sequence increment="1" name="businesses_busid_seq" startValue="1"/>
+      <sequence increment="1" name="customers_custid_seq" startValue="1"/>
+      <sequence increment="1" name="products_prodid_seq" startValue="1"/>
+      <sequence increment="1" name="sales_saleid_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table name="audits" numRows="0" remarks="An audit is an evaluation of a collection of sales." schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('audits_auditid_seq'::regclass)" digits="0" id="0" name="auditid" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="auditid" foreignKey="sale_audits_auditid_fkey" implied="false" onDeleteCascade="false" schema="public" table="sale_audits"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="1" name="entrytime" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="auditdate" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="audbusinessname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="audbusinessaddr" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="audbusinesscity" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="audbusinessstate" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="audbusinesszip" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="poc_prefix" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="poc_firstname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="poc_lastname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="poc_email" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="poc_phonenum" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="note" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="tags" nullable="true" remarks="" size="2147483647" type="jsonb" typeCode="1111"/>
+         <primaryKey column="auditid" sequenceNumberInPK="1"/>
+         <index name="audits_pkey" unique="true">
+            <column ascending="true" name="auditid"/>
+         </index>
+      </table>
+      <table name="businesses" numRows="0" remarks="A business is a seller of products to customers." schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('businesses_busid_seq'::regclass)" digits="0" id="0" name="busid" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="busid" foreignKey="sales_busid_fkey" implied="false" onDeleteCascade="false" schema="public" table="sales"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="1" name="entrytime" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="businessname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="businessaddr" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="businesscity" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="businessstate" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="businesszip" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="poc_prefix" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="poc_firstname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="poc_lastname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="poc_email" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="poc_phonenum" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="note" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="tags" nullable="true" remarks="" size="2147483647" type="jsonb" typeCode="1111"/>
+         <primaryKey column="busid" sequenceNumberInPK="1"/>
+         <index name="businesses_pkey" unique="true">
+            <column ascending="true" name="busid"/>
+         </index>
+      </table>
+      <table name="customers" numRows="0" remarks="A customer is a business contact who has purchased a product." schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('customers_custid_seq'::regclass)" digits="0" id="0" name="custid" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="custid" foreignKey="sales_custid_fkey" implied="false" onDeleteCascade="false" schema="public" table="sales"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="1" name="entrytime" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="custbusinessname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="custbusinessaddr" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="custbusinesscity" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="custbusinessstate" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="custbusinesszip" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="poc_prefix" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="poc_firstname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="poc_lastname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="poc_email" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="poc_phonenum" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="purchasedprev" nullable="true" remarks="" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="note" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="tags" nullable="true" remarks="" size="2147483647" type="jsonb" typeCode="1111"/>
+         <primaryKey column="custid" sequenceNumberInPK="1"/>
+         <index name="customers_pkey" unique="true">
+            <column ascending="true" name="custid"/>
+         </index>
+      </table>
+      <table name="products" numRows="0" remarks="A product is an item manufactured for sale." schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('products_prodid_seq'::regclass)" digits="0" id="0" name="prodid" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="prodid" foreignKey="sales_prodid_fkey" implied="false" onDeleteCascade="false" schema="public" table="sales"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="1" name="entrytime" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="prodname" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="description" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="prodtype" nullable="true" remarks="" size="2147483647" type="producttype" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="8" id="5" name="mrsp" nullable="true" remarks="" size="8" type="float4" typeCode="7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="note" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="tags" nullable="true" remarks="" size="2147483647" type="jsonb" typeCode="1111"/>
+         <primaryKey column="prodid" sequenceNumberInPK="1"/>
+         <index name="products_pkey" unique="true">
+            <column ascending="true" name="prodid"/>
+         </index>
+      </table>
+      <table name="sale_audits" numRows="0" remarks="A sales-audit connects a sale to an audit in many to many relationship." schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="auditid" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="auditid" foreignKey="sale_audits_auditid_fkey" implied="false" onDeleteCascade="false" schema="public" table="audits"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="saleid" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="saleid" foreignKey="sale_audits_saleid_fkey" implied="false" onDeleteCascade="false" schema="public" table="sales"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="2" name="entrytime" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="note" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="tags" nullable="true" remarks="" size="2147483647" type="jsonb" typeCode="1111"/>
+      </table>
+      <table name="sales" numRows="0" remarks="A sale records a customer buying product(s) from a business." schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('sales_saleid_seq'::regclass)" digits="0" id="0" name="saleid" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="saleid" foreignKey="sale_audits_saleid_fkey" implied="false" onDeleteCascade="false" schema="public" table="sale_audits"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="6" id="1" name="entrytime" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="prodid" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="prodid" foreignKey="sales_prodid_fkey" implied="false" onDeleteCascade="false" schema="public" table="products"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="busid" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="busid" foreignKey="sales_busid_fkey" implied="false" onDeleteCascade="false" schema="public" table="businesses"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="custid" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="custid" foreignKey="sales_custid_fkey" implied="false" onDeleteCascade="false" schema="public" table="customers"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="saledate" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="8" id="6" name="itemprice" nullable="true" remarks="" size="8" type="float4" typeCode="7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="quantity" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="note" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="tags" nullable="true" remarks="" size="2147483647" type="jsonb" typeCode="1111"/>
+         <primaryKey column="saleid" sequenceNumberInPK="1"/>
+         <index name="sales_pkey" unique="true">
+            <column ascending="true" name="saleid"/>
+         </index>
+      </table>
+   </tables>
+</database>

@@ -1,0 +1,66 @@
+# Have the following environment vars set in shell before running docker-compose
+# (suggested values here but can use whatever desired):
+# export DB_NAME=mydatabase
+# export DB_USER=postgres
+# export DB_PW=<somepassword>
+# export DB_PORT=5432
+
+version: '3.3'
+
+services:
+    db:
+        restart: always
+        image: postgres:latest
+        container_name: mydatabase
+        expose:
+            - ${DB_PORT}
+        ports:
+            - "${DB_PORT}:${DB_PORT}"
+        environment:
+            - POSTGRES_DB=${DB_NAME}
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_PASSWORD=${DB_PW}
+        volumes:
+            - db_data:/var/lib/postgresql/data
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    schemaspy:
+        image: schemaspy/schemaspy
+        container_name: schemaspy
+        volumes:
+            - ./spy_data:/output
+        depends_on:
+            - db
+        entrypoint: ["/entrypoint.sh", "-t", "pgsql11", "-db", "${DB_NAME}",
+            "-host", "db", "-port", "${DB_PORT}", "-u", "${DB_USER}",
+            "-p", "${DB_PW}"]
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx_schemaspy
+        volumes:
+            - ./spy_data:/usr/share/nginx/html
+        ports:
+            - "99:80"
+        depends_on:
+            - schemaspy
+
+   # metabase:
+   #      restart: always
+   #      image: metabase/metabase:latest
+   #      container_name: metabase
+   #      expose:
+   #          - "3000:3000"
+   #      environment:
+   #          - MUID=$UID
+   #          - MGID=$GID
+   #          - "JAVA_TIMEZONE=US/Pacific"
+   #          - "MB_DB_FILE=/metabase_data/metabase.db"
+   #      volumes:
+   #          - metabase_data:/metabase_data
+   #      depends_on:
+   #          - db
+
+volumes:
+    db_data:
+    # metabase_data:
